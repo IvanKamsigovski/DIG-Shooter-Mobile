@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ProjectileSpawner : MonoBehaviour
 {
-    [SerializeField] private PoolManager poolManager;
-
     private PoolManager pooler;
 
     private void Start()
@@ -15,21 +13,21 @@ public class ProjectileSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerManager.OnShoot += Fire;
+        EventHolder.OnShoot += Fire;
     }
 
     private void OnDisable()
     {
-        PlayerManager.OnShoot -= Fire;
+        EventHolder.OnShoot -= Fire;
     }
 
-    public void Fire()
+    public void Fire(Transform projectileOrigin)
     {
         //var projectile = poolManager.Get();
         var projectile = pooler.Get("Bullet");
         //projectile.transform.SetParent(gameObject.transform);
-        projectile.transform.rotation = transform.rotation;
-        projectile.transform.position = transform.position;
+        projectile.transform.rotation = projectileOrigin.rotation;
+        projectile.transform.position = projectileOrigin.position;
         projectile.gameObject.SetActive(true);
     }
 }

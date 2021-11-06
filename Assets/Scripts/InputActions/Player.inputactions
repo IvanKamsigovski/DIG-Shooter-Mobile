@@ -19,6 +19,14 @@
                     "id": "4230dc3a-31f5-438f-8993-57d189465642",
                     "expectedControlType": "Button",
                     "processors": "",
+                    "interactions": "Press(behavior=2)"
+                },
+                {
+                    "name": "Test",
+                    "type": "Value",
+                    "id": "0490ac0e-6cf2-40b2-ba62-899b6d050499",
+                    "expectedControlType": "Button",
+                    "processors": "",
                     "interactions": ""
                 }
             ],
@@ -97,6 +105,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fda25f4f-d67e-4924-a232-5cca062ac5ae",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Test",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

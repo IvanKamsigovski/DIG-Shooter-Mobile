@@ -49,6 +49,7 @@ public class ProjectileController : MonoBehaviour, IGameobjectPooled
     private void OnTriggerEnter(Collider colider)
     {
         EnemyController enemy = colider.GetComponent<EnemyController>();
+        
 
         if(enemy != null)
         {
@@ -56,7 +57,6 @@ public class ProjectileController : MonoBehaviour, IGameobjectPooled
         }
 
         //pool.ReturnToPool(this.gameObject);
-
         pool.ReturnToPool(this.gameObject, "Bullet");
 
     }

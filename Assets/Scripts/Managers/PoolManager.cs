@@ -19,10 +19,8 @@ public class PoolManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
 
-    private void Start()
-    {
+
         poolOfObjects = new Dictionary<string, Queue<GameObject>>();
 
         foreach (PooledObject item in ObjectsToPool)
@@ -32,7 +30,7 @@ public class PoolManager : MonoBehaviour
             for (int i = 0; i < item.poolSize; i++)
             {
                 GameObject newObject = Instantiate(item.pooledObject);
-                newObject.transform.parent = transform;
+                newObject.transform.parent = item.spawnParent;
                 newObject.SetActive(false);
                 objectPool.Enqueue(newObject);
 
@@ -42,6 +40,28 @@ public class PoolManager : MonoBehaviour
             poolOfObjects.Add(item.tag, objectPool);
         }
     }
+
+    //private void Start()
+    //{
+    //    poolOfObjects = new Dictionary<string, Queue<GameObject>>();
+
+    //    foreach (PooledObject item in ObjectsToPool)
+    //    {
+    //        Queue<GameObject> objectPool = new Queue<GameObject>();
+
+    //        for (int i = 0; i < item.poolSize; i++)
+    //        {
+    //            GameObject newObject = Instantiate(item.pooledObject);
+    //            newObject.transform.parent = item.spawnParent;
+    //            newObject.SetActive(false);
+    //            objectPool.Enqueue(newObject);
+
+    //            newObject.GetComponent<IGameobjectPooled>().Pool = this;
+    //        }
+
+    //        poolOfObjects.Add(item.tag, objectPool);
+    //    }
+    //}
 
     //public GameObject Get()
     //{
@@ -88,12 +108,15 @@ public class PoolManager : MonoBehaviour
 
             if(item.tag == tag)
             {
-                GameObject newObject = Instantiate(item.pooledObject);
-                newObject.transform.parent = transform;
-                newObject.SetActive(false);
-                objectPool.Enqueue(newObject);
+                if(item.expandable)
+                {
+                    GameObject newObject = Instantiate(item.pooledObject);
+                    newObject.transform.parent = item.spawnParent;
+                    newObject.SetActive(false);
+                    objectPool.Enqueue(newObject);
 
-                newObject.GetComponent<IGameobjectPooled>().Pool = this;
+                    newObject.GetComponent<IGameobjectPooled>().Pool = this;
+                }
             }
         }
     }

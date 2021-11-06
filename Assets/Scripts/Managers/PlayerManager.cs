@@ -5,12 +5,18 @@ using System;
 
 public class PlayerManager : MonoBehaviour
 {
-    public static Action OnShoot;
+    public static PlayerManager Instance { set; get; }
+    //public static Action OnShoot;
+
+    public Transform Player;
+
+    [SerializeField] private Transform projectileOrigin;
 
     private Player playerInput;
 
     private void Awake()
     {
+        Instance = this;
         playerInput = new Player();
     }
 
@@ -28,7 +34,14 @@ public class PlayerManager : MonoBehaviour
     {
         if (playerInput.PlayerMain.Shoot.triggered)
         {
-            OnShoot?.Invoke();
+            EventHolder.OnShoot?.Invoke(projectileOrigin);
         }
+        //if (playerInput.PlayerMain.Shoot.triggered)
+        //{
+        //    OnShoot?.Invoke();
+        //    Debug.Log("PUCA");
+        //    EventHolder.OnShoot?.Invoke(projectileOrigin);
+        //}
     }
+
 }

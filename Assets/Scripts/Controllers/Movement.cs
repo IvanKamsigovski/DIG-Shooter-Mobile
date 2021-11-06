@@ -33,14 +33,6 @@ public class Movement : MonoBehaviour
         movement();
     }
 
-    //private void Update()
-    //{
-    //    if (playerInput.PlayerMain.Shoot.triggered)
-    //    {
-    //        Debug.Log("PUC PUC");
-    //    }
-    //}
-
     private void movement()
     {
         groundedPlayer = controller.isGrounded;
@@ -58,5 +50,4 @@ public class Movement : MonoBehaviour
             gameObject.transform.forward = move;
         }
     }
-
 }
